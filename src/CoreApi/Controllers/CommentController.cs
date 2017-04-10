@@ -1,77 +1,74 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using CoreApi.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using CoreApi.Models;
+using CoreApi.Models.Repo.Interface;
+using CoreApi.Models.DomainModel;
 
-//// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+namespace CoreApi.Controllers
+{
+    [Route("api/[controller]")]
+    public class CommentController : Controller
+    {
+        #region Dependency
+        private readonly ICommentRepository _repo;
 
-//namespace CoreApi.Controllers
-//{
-//    [Route("api/[controller]")]
-//    public class CommentController : Controller
-//    {
-//        #region Dependency
-//        private readonly ITodoRepository _todoRepository;
+        public CommentController(ICommentRepository commentRepository)
+        {
+            _repo = commentRepository;
+        }
+        #endregion
 
-//        public TodoController(ITodoRepository todoRepository)
-//        {
-//            _todoRepository = todoRepository;
-//        }
-//        #endregion
+        [HttpGet]
+        public IEnumerable<Comment> GetAll()
+        {
+            return _repo.GetAll();
+        }
 
-//        [HttpGet]
-//        public IEnumerable<TodoItem> GetAll()
-//        {
-//            return _todoRepository.GetAll();
-//        }
+        [HttpGet("{id}", Name = "GetComment")]
+        public IActionResult GetById(Guid id)
+        {
+            var item = _repo.Get(id);
+            if (item == null)
+                return NotFound();
 
-//        [HttpGet("{id}", Name = "GetTodo")]
-//        public IActionResult GetById(Guid id)
-//        {
-//            var item = _todoRepository.Find(id);
-//            if (item == null)
-//                return NotFound();
+            return new ObjectResult(item);
+        }
 
-//            return new ObjectResult(item);
-//        }
+        [HttpPost]
+        public IActionResult Create([FromBody] Comment item)
+        {
+            if (item == null)
+                return BadRequest();
 
-//        [HttpPost]
-//        public IActionResult Create([FromBody] TodoItem item)
-//        {
-//            if (item == null)
-//            {
-//                return BadRequest();
-//            }
+            _repo.Add(item);
+            return CreatedAtRoute("Getcomment", new { id = item.Id }, item);
+        }
 
-//            _todoRepository.Add(item);
+        [HttpPut("{id}")]
+        public IActionResult Update(Guid id, [FromBody] Comment item)
+        {
+            if (item == null || item.Id != id)
+                return BadRequest();
 
-//            return CreatedAtRoute("GetTodo", new { id = item.Key }, item);
-//        }
+            var comment = _repo.Get(id);
+            if (comment == null)
+                return NotFound();
 
-//        [HttpPut("{id}")]
-//        public IActionResult Update(Guid id, [FromBody] TodoItem item)
-//        {
-//            if (item == null || item.Key != id)
-//                return BadRequest();
+            //comment....    = item....
+            //comment....    = item....
 
-//            var todo = _todoRepository.Find(id);
-//            if (todo == null)
-//                return NotFound();
+            _repo.Update(comment);
+            return new NoContentResult();
+        }
 
-//            todo.IsComplete = item.IsComplete;
-//            todo.Name = item.Name;
-
-//            _todoRepository.Update(todo);
-//            return new NoContentResult();
-//        }
-
-//        [HttpDelete("{id}")]
-//        public IActionResult Delete(Guid id)
-//        {
-//            _todoRepository.Remove(id);
-//            return new NoContentResult();
-//        }
-//    }
-//}
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            _repo.Remove(id);
+            return new NoContentResult();
+        }
+    }
+}

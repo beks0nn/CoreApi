@@ -19,7 +19,6 @@ namespace CoreApi.Models.Repo
             _entities = Context.Set<TEntity>();
         }
 
-
         public void Add(TEntity entity)
         {
             _entities.Add(entity);

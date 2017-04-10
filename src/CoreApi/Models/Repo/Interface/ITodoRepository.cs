@@ -6,7 +6,6 @@ namespace CoreApi.Models.Repo.Interface
 {
     public interface ITodoRepository : IRepository<TodoItem>
     {
-        // Extra method specific to IAnimal should be declared here!
-        //IEnumerable<Animal> GetMostDangerousAnimals(int maxHits);
+        // Extra method specific to ITodoRepository should be declared here!
     }
 }

@@ -11,6 +11,7 @@ namespace CoreApi.Extension
         {
             //Dependency injection "Config" goes here
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
 
             return services;
