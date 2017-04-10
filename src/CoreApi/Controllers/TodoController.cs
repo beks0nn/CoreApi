@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using CoreApi.Models;
 using CoreApi.Models.DomainModel;
-using CoreApi.Models.Repo;
 using CoreApi.Models.Repo.Interface;
 
 namespace CoreApi.Controllers

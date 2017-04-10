@@ -1,5 +1,4 @@
-﻿using CoreApi.Models;
-using CoreApi.Models.Repo;
+﻿using CoreApi.Models.Repo;
 using CoreApi.Models.Repo.Interface;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +11,6 @@ namespace CoreApi.Extension
             //Dependency injection "Config" goes here
             services.AddScoped<ITodoRepository, TodoRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-
 
             return services;
         }
