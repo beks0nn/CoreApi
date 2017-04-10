@@ -15,5 +15,7 @@ namespace CoreApi.Models
 
         public DbSet<TodoItem> TodoItems { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
+
     }
 }

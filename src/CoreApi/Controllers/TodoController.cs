@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CoreApi.Models;
 using CoreApi.Models.DomainModel;
+using CoreApi.Models.Repo;
+using CoreApi.Models.Repo.Interface;
 
 namespace CoreApi.Controllers
 {
@@ -29,7 +31,7 @@ namespace CoreApi.Controllers
         [HttpGet("{id}", Name = "GetTodo")]
         public IActionResult GetById(Guid id)
         {
-            var item = _todoRepository.Find(id);
+            var item = _todoRepository.Get(id);
             if (item == null)
                 return NotFound();
             
@@ -55,7 +57,7 @@ namespace CoreApi.Controllers
             if (item == null || item.Id != id)
                 return BadRequest();
 
-            var todo = _todoRepository.Find(id);
+            var todo = _todoRepository.Get(id);
             if (todo == null)
                 return NotFound();
 
