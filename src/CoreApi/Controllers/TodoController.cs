@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CoreApi.Models;
+using CoreApi.Models.DomainModel;
 
 namespace CoreApi.Controllers
 {
@@ -45,13 +46,13 @@ namespace CoreApi.Controllers
 
             _todoRepository.Add(item);
 
-            return CreatedAtRoute("GetTodo", new { id = item.Key }, item);
+            return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(Guid id, [FromBody] TodoItem item)
         {
-            if (item == null || item.Key != id)
+            if (item == null || item.Id != id)
                 return BadRequest();
 
             var todo = _todoRepository.Find(id);

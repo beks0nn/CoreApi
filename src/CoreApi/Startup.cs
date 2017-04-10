@@ -40,7 +40,7 @@ namespace CoreApi
             // Add framework services. 
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase());
             services.AddMvc();
 
             //Dependency injection

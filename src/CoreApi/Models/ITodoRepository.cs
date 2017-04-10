@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoreApi.Models.DomainModel;
+using System;
 using System.Collections.Generic;
 
 namespace CoreApi.Models
