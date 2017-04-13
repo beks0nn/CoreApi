@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CoreApi.Models.Repo.Interface;
 using CoreApi.Models.DomainModel;
+using Microsoft.AspNetCore.Cors;
 
 namespace CoreApi.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     public class CommentController : Controller
     {
@@ -56,8 +58,8 @@ namespace CoreApi.Controllers
             if (comment == null)
                 return NotFound();
 
-            //comment....    = item....
-            //comment....    = item....
+            comment.Text = item.Text;
+            comment.Author = item.Author;
 
             _repo.Update(comment);
             return new NoContentResult();

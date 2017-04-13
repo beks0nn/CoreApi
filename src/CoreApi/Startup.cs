@@ -41,6 +41,16 @@ namespace CoreApi
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase());
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddMvc();
 
             //Dependency injection
@@ -55,7 +65,6 @@ namespace CoreApi
             loggerFactory.AddDebug();
 
             app.UseApplicationInsightsRequestTelemetry();
-
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseMvc();
