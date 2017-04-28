@@ -2082,6 +2082,25 @@
           "lib/netstandard1.6/React.Core.dll": {}
         }
       },
+      "RestEase/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "Newtonsoft.Json": "9.0.1",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Net.Http": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Emit": "4.0.1",
+          "System.Text.Encodings.Web": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/RestEase.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/RestEase.dll": {}
+        }
+      },
       "runtime.native.System/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -5729,6 +5748,19 @@
         "lib/net40/React.Core.xml",
         "lib/netstandard1.6/React.Core.dll",
         "lib/netstandard1.6/React.Core.xml"
+      ]
+    },
+    "RestEase/1.4.0": {
+      "sha512": "oFiQ59aTJnAFdDkJTgqOu65BhrpqUdflTy9FEDLz75loHNnBAUJ+uXkTVnbWEWEe273ugjh8oT4gV4zLobVGsQ==",
+      "type": "package",
+      "path": "RestEase/1.4.0",
+      "files": [
+        "RestEase.1.4.0.nupkg.sha512",
+        "RestEase.nuspec",
+        "lib/net45/RestEase.dll",
+        "lib/net45/RestEase.xml",
+        "lib/netstandard1.1/RestEase.dll",
+        "lib/netstandard1.1/RestEase.xml"
       ]
     },
     "runtime.native.System/4.0.0": {
@@ -10367,7 +10399,8 @@
       "Microsoft.Extensions.Options.ConfigurationExtensions >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.1",
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0",
-      "React.AspNet >= 3.0.1"
+      "React.AspNet >= 3.0.1",
+      "RestEase >= 1.4.0"
     ],
     ".NETCoreApp,Version=v1.0": []
   },
