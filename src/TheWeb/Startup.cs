@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using React.AspNet;
-
+using TheWeb.Models.Services.Implementation;
+using TheWeb.Models.Services.Interface;
 
 namespace TheWeb
 {
@@ -40,6 +41,7 @@ namespace TheWeb
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ICommentServiceInternal,CommentService>();
             services.AddReact();
 
             services.AddMvc();

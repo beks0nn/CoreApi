@@ -7,14 +7,22 @@ using TheWeb.Models;
 using TheWeb.Models.Services.Implementation;
 using Newtonsoft.Json;
 using RestEase;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using TheWeb.Models.Services.Interface;
 
 namespace TheWeb.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: /<controller>/
+        #region Dependency
+        private readonly ICommentServiceInternal _commentService;
+
+        public HomeController(ICommentServiceInternal commentService)
+        {
+            _commentService = commentService;
+        }
+        #endregion
+
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -25,9 +33,7 @@ namespace TheWeb.Controllers
         [HttpPost]
         public IActionResult AddComment(CommentModel comment)
         {
-            var provider = new CommentService();
-            CommentModel ret = provider.CreateComment(comment);
-
+            var ret = _commentService.CreateComment(comment);
             return Content(JsonConvert.SerializeObject(ret));
         }
 
@@ -35,9 +41,7 @@ namespace TheWeb.Controllers
         [HttpGet]
         public IActionResult GetAllComments()
         {
-            var provider = new CommentService();
-            List<CommentModel> ret = provider.GetComments();
-
+            var ret = _commentService.GetComments();
             return Content(JsonConvert.SerializeObject(ret));
         }
     }
